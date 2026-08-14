@@ -14,6 +14,6 @@ O download do aplicativo e do modelo opcional é servido por plataformas
 externas e fica sujeito aos registros técnicos dessas plataformas, como
 endereço IP e horário de acesso. O Dotchi não recebe esses registros.
 
-Para dúvidas de privacidade, abra um chamado em
-[Issues](https://github.com/itsmeluan/dotchi-releases/issues) sem anexar imagens,
-projetos ou informações pessoais que não sejam necessárias.
+Para dúvidas de privacidade, escreva para
+[dotchi.app@gmail.com](mailto:dotchi.app@gmail.com) sem anexar imagens, projetos
+ou informações pessoais que não sejam necessárias.

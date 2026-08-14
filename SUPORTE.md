@@ -1,6 +1,7 @@
 # Suporte
 
-Use [Issues](https://github.com/itsmeluan/dotchi-releases/issues) para relatar
+Escreva para [dotchi.app@gmail.com](mailto:dotchi.app@gmail.com) ou use
+[Issues](https://github.com/itsmeluan/dotchi-releases/issues) para relatar
 problemas com download, instalação ou uso do Dotchi.
 
 Inclua, quando for relevante:
@@ -22,3 +23,10 @@ o valor declarado na Release e relate a divergência ou mensagem recebida.
 
 O Dotchi não possui atualização automática nesta versão. Novas versões devem
 ser baixadas manualmente deste repositório.
+
+## Apoio financeiro
+
+Pix e PayPal permanecem indisponíveis enquanto os dados públicos e a orientação
+contábil não forem confirmados. Este repositório não publica hoje chave Pix,
+QR Code, nome do recebedor ou link PayPal. Não envie pagamento para dados
+apresentados por terceiros como se fossem oficiais.
