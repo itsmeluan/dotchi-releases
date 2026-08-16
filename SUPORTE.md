@@ -12,6 +12,9 @@ Inclua, quando for relevante:
 - mensagem de erro exata;
 - SHA-256 do DMG baixado.
 
+O diagnóstico deve começar por esses dados. Não é necessário enviar o projeto
+ou a imagem para relatar uma falha de instalação, assinatura ou abertura.
+
 Não publique senhas, códigos 2FA, chaves de recuperação, chaves privadas,
 certificados, projetos confidenciais ou imagens que não possam ser públicas.
 
@@ -26,7 +29,7 @@ ser baixadas manualmente deste repositório.
 
 ## Apoio financeiro
 
-Pix e PayPal permanecem indisponíveis enquanto os dados públicos e a orientação
-contábil não forem confirmados. Este repositório não publica hoje chave Pix,
-QR Code, nome do recebedor ou link PayPal. Não envie pagamento para dados
-apresentados por terceiros como se fossem oficiais.
+Pix e PayPal permanecem indisponíveis. Eles poderão ser ativados depois apenas
+no site, sem uma nova versão do aplicativo. Este repositório não publica hoje
+chave Pix, QR Code, nome do recebedor ou link PayPal. Não envie pagamento para
+dados apresentados por terceiros como se fossem oficiais.

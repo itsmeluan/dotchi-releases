@@ -36,7 +36,7 @@ for (const arquivo of htmls) {
 
 for (const rota of ["download", "pt-br/download"]) {
   const html = await readFile(resolve(docs, rota, "index.html"), "utf8");
-  for (const valor of [release.version, release.file, release.size, release.sha256, release.downloadUrl]) {
+  for (const valor of [release.version, release.minimumSystem, release.file, release.size, release.sha256, release.downloadUrl]) {
     if (!html.includes(valor)) throw new Error(`${rota} divergiu de release.json em ${valor}`);
   }
 }

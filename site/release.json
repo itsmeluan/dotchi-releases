@@ -1,11 +1,12 @@
 {
-  "version": "0.1.0",
-  "date": "2026-08-14",
+  "version": "1.0.0",
+  "date": "2026-08-16",
   "platform": "macOS",
   "architecture": "Apple Silicon (arm64)",
-  "file": "Dotchi_0.1.0_aarch64.dmg",
-  "size": "43.180.689 bytes",
-  "sha256": "d439dd60995a6d9ecdb49c75247d19d7d9586d425b8045598525d5c3d71e46ac",
-  "downloadUrl": "https://github.com/itsmeluan/dotchi-releases/releases/download/v0.1.0/Dotchi_0.1.0_aarch64.dmg",
-  "releaseUrl": "https://github.com/itsmeluan/dotchi-releases/releases/tag/v0.1.0"
+  "minimumSystem": "macOS 13.3 or later",
+  "file": "Dotchi_1.0.0_aarch64.dmg",
+  "size": "45.101.203 bytes",
+  "sha256": "1eaa83caaeb84f3bf8c7b9e3647bb3787a38fc0679cd3b4822369e6a727ec45e",
+  "downloadUrl": "https://github.com/itsmeluan/dotchi-releases/releases/download/v1.0.0/Dotchi_1.0.0_aarch64.dmg",
+  "releaseUrl": "https://github.com/itsmeluan/dotchi-releases/releases/tag/v1.0.0"
 }

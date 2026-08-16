@@ -9,6 +9,8 @@ O Dotchi foi projetado para processar imagens e projetos localmente no Mac.
   escolhidos pela pessoa usuária;
 - a IA textual opcional usa um modelo Qwen executado localmente. O modelo é
   baixado uma vez, com integridade verificada, e depois roda no próprio Mac.
+- a integração MCP usa entrada e saída padrão, fica presa ao projeto escolhido
+  e não abre porta nem serviço de rede.
 
 O download do aplicativo e do modelo opcional é servido por plataformas
 externas e fica sujeito aos registros técnicos dessas plataformas, como

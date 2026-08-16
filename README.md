@@ -12,8 +12,9 @@ conta, assinatura ou serviço pago.
 Baixe a versão mais recente na página de
 [Releases](https://github.com/itsmeluan/dotchi-releases/releases/latest).
 
-A distribuição inicial é para Macs com Apple Silicon (`arm64`). Cada Release
-declara o SHA-256 do DMG para conferência de integridade.
+A versão 1.0 é para Macs com Apple Silicon (`arm64`) e exige macOS 13.3 ou
+posterior. Cada Release declara o SHA-256 do DMG para conferência de
+integridade.
 
 ## Instalar
 
@@ -30,7 +31,7 @@ macOS recusar a abertura, confira o SHA-256 e abra um chamado em
 Para conferir o arquivo no Terminal:
 
 ```bash
-shasum -a 256 ~/Downloads/Dotchi_0.1.0_aarch64.dmg
+shasum -a 256 ~/Downloads/Dotchi_1.0.0_aarch64.dmg
 ```
 
 ## Site, privacidade e suporte
@@ -47,9 +48,9 @@ node site/test.mjs
 - [Suporte](SUPORTE.md)
 - [Termos do binário](TERMOS.md)
 
-Os canais de apoio financeiro permanecem como placeholders inativos até a
-confirmação dos dados públicos e da orientação contábil. Este repositório não
-deve receber chave Pix, QR Code, identidade civil do recebedor nem credencial.
+Os canais de apoio financeiro permanecem inativos e podem ser habilitados no
+site depois, sem mudar o aplicativo. Este repositório não deve receber chave
+Pix, QR Code, identidade civil do recebedor nem credencial antes dessa decisão.
 
 Este repositório é somente o canal público dos binários. O código-fonte e o
 formato `.dotchi` permanecem proprietários e não são publicados aqui. O
