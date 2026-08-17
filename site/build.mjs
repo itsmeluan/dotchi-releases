@@ -157,7 +157,7 @@ function supportCards(pt) {
       <article class="card support-card">
         <span class="status active">Disponível</span>
         <h2>PayPal</h2>
-        <p>Escaneie o QR Code com o celular ou abra o endereço oficial no PayPal. O pagamento é processado pelo próprio PayPal.</p>
+        <p>Escaneie o QR Code com o celular ou abra o endereço oficial no PayPal. Em alguns navegadores, o endereço pode abrir a página do aplicativo; nesse caso, use o QR Code. O pagamento é processado pelo próprio PayPal.</p>
         <img class="payment-qr" src="${paypalQr}" width="533" height="535" alt="QR Code do PayPal para apoiar o Dotchi">
         <div class="payment-actions single">
           <a class="button primary" href="${paypalUrl}" target="_blank" rel="noopener noreferrer">Abrir no PayPal</a>
@@ -184,7 +184,7 @@ function supportCards(pt) {
       <article class="card support-card">
         <span class="status active">Available</span>
         <h2>PayPal</h2>
-        <p>Scan the QR code with your phone or open the official PayPal address. PayPal processes the payment directly.</p>
+        <p>Scan the QR code with your phone or open the official PayPal address. In some browsers, the address may open PayPal's app page; if that happens, use the QR code. PayPal processes the payment directly.</p>
         <img class="payment-qr" src="${paypalQr}" width="533" height="535" alt="PayPal QR code to support Dotchi">
         <div class="payment-actions single">
           <a class="button primary" href="${paypalUrl}" target="_blank" rel="noopener noreferrer">Open PayPal</a>
