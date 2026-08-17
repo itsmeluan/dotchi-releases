@@ -1,0 +1,14 @@
+{
+  "pix": {
+    "key": "f26cacd7-5400-47ef-9c22-f93e2fe37a64",
+    "payload": "00020126580014BR.GOV.BCB.PIX0136f26cacd7-5400-47ef-9c22-f93e2fe37a645204000053039865802BR5921Luan Martins da Silva6009SAO PAULO62140510dCzTGEfHkS63049639",
+    "recipient": "Luan Martins da Silva",
+    "qrAsset": "pix-qr.png",
+    "qrSha256": "a31c86496a5e6198ce57cfb325afeb17ad3793f1fcee5447b0cc90d2d2d633f2"
+  },
+  "paypal": {
+    "url": "https://www.paypal.com/qrcodes/p2pqrc/TQ84K5F2U3HC6",
+    "qrAsset": "paypal-qr.jpg",
+    "qrSha256": "910f884ae68f74ceac4796f7da30b8ce1d9b0e1373e87bc88abef11d0264c238"
+  }
+}

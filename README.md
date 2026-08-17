@@ -50,9 +50,11 @@ node site/test.mjs
 - [Suporte](SUPORTE.md)
 - [Termos do binário](TERMOS.md)
 
-Os canais de apoio financeiro permanecem inativos e podem ser habilitados no
-site depois, sem mudar o aplicativo. Este repositório não deve receber chave
-Pix, QR Code, identidade civil do recebedor nem credencial antes dessa decisão.
+Os canais opcionais de apoio por Pix e PayPal estão ativos somente na página
+bilíngue de apoio do site. O aplicativo continua gratuito e completo; contribuir
+não libera recursos, prioridade ou uma licença diferente. Os dados públicos de
+pagamento ficam isolados em `site/support.json`, e os testes conferem o checksum
+do Pix e os arquivos exatos dos dois QR Codes antes de gerar `docs/`.
 
 Este repositório é somente o canal público dos binários. O código-fonte e o
 formato `.dotchi` permanecem proprietários e não são publicados aqui. O

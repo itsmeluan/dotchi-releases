@@ -17,3 +17,8 @@ permanecem propriedade do autor e não são licenciados por este repositório.
 
 O software é fornecido no estado em que se encontra, sem garantias expressas ou
 implícitas, dentro dos limites permitidos pela legislação aplicável.
+
+## Apoio opcional
+
+O apoio financeiro é voluntário. Ele não é uma compra e não cria direito a
+recursos, prioridade de suporte, influência, serviços ou licença diferente.

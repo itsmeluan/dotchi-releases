@@ -29,7 +29,11 @@ ser baixadas manualmente deste repositório.
 
 ## Apoio financeiro
 
-Pix e PayPal permanecem indisponíveis. Eles poderão ser ativados depois apenas
-no site, sem uma nova versão do aplicativo. Este repositório não publica hoje
-chave Pix, QR Code, nome do recebedor ou link PayPal. Não envie pagamento para
-dados apresentados por terceiros como se fossem oficiais.
+O apoio opcional por Pix e PayPal está disponível na página **Apoie o Dotchi**
+do site oficial. O Dotchi permanece gratuito e completo: contribuir não libera
+recursos, prioridade, influência ou uma licença diferente.
+
+Antes de confirmar, confira no banco ou no PayPal o recebedor exibido. O site
+não pede senha, código de autenticação, número de cartão ou credencial bancária.
+Guarde o comprovante para seus registros e use somente os canais publicados na
+página oficial.

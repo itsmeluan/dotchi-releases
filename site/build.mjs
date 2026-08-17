@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 const here = dirname(fileURLToPath(import.meta.url));
 const out = resolve(here, "../docs");
 const release = JSON.parse(await readFile(resolve(here, "release.json"), "utf8"));
+const support = JSON.parse(await readFile(resolve(here, "support.json"), "utf8"));
 
 const locales = {
   en: {
@@ -127,22 +128,88 @@ function releaseBox(pt) {
   return `<dl class="release-box">${labels.map((label,i) => `<div class="release-row"><dt>${label}</dt><dd>${esc(values[i])}${label === "SHA-256" ? `<button class="copy" type="button" data-copy="${release.sha256}">${pt ? "Copiar" : "Copy"}</button>` : ""}</dd></div>`).join("")}</dl>`;
 }
 
+function supportCards(pt) {
+  const assets = pt ? "../../assets" : "../assets";
+  const pixKey = esc(support.pix.key);
+  const pixPayload = esc(support.pix.payload);
+  const recipient = esc(support.pix.recipient);
+  const paypalUrl = esc(support.paypal.url);
+  const pixQr = `${assets}/${esc(support.pix.qrAsset)}`;
+  const paypalQr = `${assets}/${esc(support.paypal.qrAsset)}`;
+
+  return pt ? `
+    <p>O apoio é voluntário e não libera recursos, prioridade, influência ou uma edição diferente. Escolha livremente se e quanto deseja contribuir.</p>
+    <div class="support-grid">
+      <article class="card support-card">
+        <span class="status active">Disponível</span>
+        <h2>Brasil — Pix</h2>
+        <p>Escaneie o QR Code ou copie o código Pix. O valor não vem preenchido: você escolhe no aplicativo do seu banco.</p>
+        <img class="payment-qr" src="${pixQr}" width="444" height="436" alt="QR Code Pix para apoiar o Dotchi">
+        <dl class="payment-details">
+          <div><dt>Recebedor</dt><dd>${recipient}</dd></div>
+          <div><dt>Chave aleatória</dt><dd><code>${pixKey}</code></dd></div>
+        </dl>
+        <div class="payment-actions">
+          <button class="button primary" type="button" data-copy="${pixPayload}" aria-live="polite">Copiar código Pix</button>
+          <button class="button" type="button" data-copy="${pixKey}" aria-live="polite">Copiar chave Pix</button>
+        </div>
+      </article>
+      <article class="card support-card">
+        <span class="status active">Disponível</span>
+        <h2>PayPal</h2>
+        <p>Escaneie o QR Code com o celular ou abra o endereço oficial no PayPal. O pagamento é processado pelo próprio PayPal.</p>
+        <img class="payment-qr" src="${paypalQr}" width="533" height="535" alt="QR Code do PayPal para apoiar o Dotchi">
+        <div class="payment-actions single">
+          <a class="button primary" href="${paypalUrl}" target="_blank" rel="noopener noreferrer">Abrir no PayPal</a>
+        </div>
+      </article>
+    </div>
+    <p class="notice"><strong>Antes de confirmar:</strong> confira o recebedor exibido pelo seu banco ou pelo PayPal. O Dotchi não solicita senha, código de autenticação ou dados de cartão nesta página. Guarde o comprovante para seus registros.</p>` : `
+    <p>Support is voluntary and does not unlock features, priority, influence, or a different edition. You freely choose whether and how much to contribute.</p>
+    <div class="support-grid">
+      <article class="card support-card">
+        <span class="status active">Available</span>
+        <h2>Brazil — Pix</h2>
+        <p>Scan the QR code or copy the Pix code. No amount is preset; you choose it in your banking app.</p>
+        <img class="payment-qr" src="${pixQr}" width="444" height="436" alt="Pix QR code to support Dotchi">
+        <dl class="payment-details">
+          <div><dt>Recipient</dt><dd>${recipient}</dd></div>
+          <div><dt>Random key</dt><dd><code>${pixKey}</code></dd></div>
+        </dl>
+        <div class="payment-actions">
+          <button class="button primary" type="button" data-copy="${pixPayload}" aria-live="polite">Copy Pix code</button>
+          <button class="button" type="button" data-copy="${pixKey}" aria-live="polite">Copy Pix key</button>
+        </div>
+      </article>
+      <article class="card support-card">
+        <span class="status active">Available</span>
+        <h2>PayPal</h2>
+        <p>Scan the QR code with your phone or open the official PayPal address. PayPal processes the payment directly.</p>
+        <img class="payment-qr" src="${paypalQr}" width="533" height="535" alt="PayPal QR code to support Dotchi">
+        <div class="payment-actions single">
+          <a class="button primary" href="${paypalUrl}" target="_blank" rel="noopener noreferrer">Open PayPal</a>
+        </div>
+      </article>
+    </div>
+    <p class="notice"><strong>Before confirming:</strong> verify the recipient shown by your bank or PayPal. Dotchi never asks for a password, authentication code, or card details on this page. Keep the receipt for your records.</p>`;
+}
+
 const pages = {
   en: {
     download: ["Download", "Get the current Apple Silicon build and verify its integrity.", `${releaseBox(false)}<div class="actions"><a class="button primary" href="${release.downloadUrl}">Download ${release.file}</a><a class="button" href="${release.releaseUrl}">View release</a><a class="button" href="${release.itchUrl}">View on itch.io</a></div><h2>Install</h2><ol><li>Download the DMG.</li><li>Compare its SHA-256 checksum with the value above.</li><li>Open the DMG and drag Dotchi to Applications.</li><li>Eject the image and open Dotchi from Applications.</li></ol><p class="notice">Dotchi 1.0 is distributed for Apple Silicon and requires macOS 13.3 or later. Do not bypass Gatekeeper if installation fails; use the help page instead.</p>`],
-    privacy: ["Privacy", "How Dotchi handles your files and the few network connections around distribution.", `<h2>Local processing</h2><p>Dotchi requires no account, contains no telemetry or advertising, and does not send images or projects to external APIs. Preferences, projects, and exports remain on your device or in locations you choose.</p><h2>Optional local AI</h2><p>The optional text assistant uses a Qwen model downloaded once with integrity verification and then run on your device. It does not generate images.</p><h2>External services</h2><p>GitHub serves this website and the canonical application download. itch.io mirrors the same DMG as an additional public storefront. These services may keep technical access records such as IP address and time. Dotchi does not receive those logs. Optional support payments are not active yet; this page will be updated before they become available.</p><h2>Contact</h2><p>Privacy questions: <a href="mailto:dotchi.app@gmail.com">dotchi.app@gmail.com</a>. Do not attach private projects or images unless they are necessary and safe to share.</p>`],
-    terms: ["Terms", "The license for the distributed Dotchi binary.", `<p>Copyright © 2026 Luan Martins. All rights reserved.</p><p>Dotchi is proprietary software. Downloading grants a personal, non-exclusive, non-transferable license to install and use the binary published in this repository.</p><p>Without prior written permission, the license does not allow redistribution, modification, sublicensing, sale, commercial exploitation, reverse engineering, or creation of derivative works, except where a restriction cannot legally apply.</p><p>The source code, internal documentation, and <code>.dotchi</code> file format remain the author's property. The software is provided as-is, without express or implied warranties, to the extent permitted by law.</p>`],
+    privacy: ["Privacy", "How Dotchi handles your files and the few network connections around distribution.", `<h2>Local processing</h2><p>Dotchi requires no account, contains no telemetry or advertising, and does not send images or projects to external APIs. Preferences, projects, and exports remain on your device or in locations you choose.</p><h2>Optional local AI</h2><p>The optional text assistant uses a Qwen model downloaded once with integrity verification and then run on your device. It does not generate images.</p><h2>External services</h2><p>GitHub serves this website and the canonical application download. itch.io mirrors the same DMG as an additional public storefront. These services may keep technical access records such as IP address and time. Dotchi does not receive those logs.</p><h2>Optional support</h2><p>The support page offers Pix through the contributor's banking app and PayPal through PayPal's own service. Dotchi does not host a payment form and does not receive passwords, authentication codes, card numbers, or bank credentials. The bank or PayPal processes the payment under its own privacy terms and may share the information normally shown on a payment receipt with the recipient.</p><h2>Contact</h2><p>Privacy questions: <a href="mailto:dotchi.app@gmail.com">dotchi.app@gmail.com</a>. Do not attach private projects or images unless they are necessary and safe to share.</p>`],
+    terms: ["Terms", "The license for the distributed Dotchi binary.", `<p>Copyright © 2026 Luan Martins. All rights reserved.</p><p>Dotchi is proprietary software. Downloading grants a personal, non-exclusive, non-transferable license to install and use the binary published in this repository.</p><p>Without prior written permission, the license does not allow redistribution, modification, sublicensing, sale, commercial exploitation, reverse engineering, or creation of derivative works, except where a restriction cannot legally apply.</p><p>The source code, internal documentation, and <code>.dotchi</code> file format remain the author's property. The software is provided as-is, without express or implied warranties, to the extent permitted by law.</p><h2>Optional support</h2><p>Financial support is voluntary. It is not a purchase and does not create entitlement to features, support priority, influence, services, or a different license.</p>`],
     help: ["Help", "Installation help, feedback, and safe ways to ask for support.", `<h2>Installation</h2><p>Verify the DMG checksum, install Dotchi in Applications, and open it normally. Do not disable Gatekeeper or remove quarantine attributes.</p><h2 id="feedback">Send feedback</h2><p>Email <a href="mailto:dotchi.app@gmail.com?subject=Dotchi%20feedback">dotchi.app@gmail.com</a> or open a public <a href="https://github.com/itsmeluan/dotchi-releases/issues/new">GitHub issue</a>. Include the Dotchi version, macOS version, steps to reproduce, expected result, and what happened.</p><p class="notice">Never publish passwords, 2FA codes, recovery keys, private keys, certificates, confidential projects, or images that cannot be public.</p><h2>Download problems</h2><p>Include the exact error message and the SHA-256 you calculated. Dotchi has no automatic updater in this version.</p>`],
     changelog: ["Changelog", "What changed in each public Dotchi build.", `<h2>Version ${release.version}</h2><p>First stable Apple Silicon release, for macOS 13.3 or later.</p><ul><li>Deterministic image-to-pixel-art conversion.</li><li>Sprite editor with layers, frames, palettes, color history, grouped tools, and contextual cursors.</li><li>Pixel-perfect drawing, shapes, even/odd symmetry, and selections that may start outside the canvas.</li><li>PNG, animation, tile, and game workflow exports.</li><li>QuickLook for <code>.dotchi</code> documents.</li><li>Optional local Qwen text AI.</li><li>Restricted local MCP integration with preview, visual refinement, and explicit create-only writes.</li></ul><p>The DMG is signed, notarized, stapled, and published with its SHA-256 checksum.</p>`],
-    support: ["Support Dotchi", "Dotchi is free and complete. Optional support will help sustain its development.", `<p>Support is voluntary and does not unlock features, priority, influence, or a different edition. The payment channels below remain deliberately inactive until the public recipient details and accounting guidance are confirmed.</p><div class="support-grid"><article class="card placeholder"><span class="status">Coming soon</span><h2>Brazil — Pix</h2><p>A random Pix key and public recipient name will appear here only after final confirmation.</p><span class="button" aria-disabled="true">Pix unavailable</span></article><article class="card placeholder"><span class="status">Coming soon</span><h2>International — PayPal</h2><p>The official PayPal Business payment link will appear here only after final confirmation.</p><span class="button" aria-disabled="true">PayPal unavailable</span></article></div><p class="notice">There is no active payment link, Pix key, QR code, or recipient identity on this site today. If someone presents one as official, do not pay.</p>`],
+    support: ["Support Dotchi", "Dotchi is free and complete. Optional support helps sustain its development.", supportCards(false)],
   },
   pt: {
     download: ["Baixar", "Obtenha a versão atual para Apple Silicon e confira sua integridade.", `${releaseBox(true)}<div class="actions"><a class="button primary" href="${release.downloadUrl}">Baixar ${release.file}</a><a class="button" href="${release.releaseUrl}">Ver Release</a><a class="button" href="${release.itchUrl}">Ver no itch.io</a></div><h2>Instalar</h2><ol><li>Baixe o DMG.</li><li>Compare o SHA-256 com o valor acima.</li><li>Abra o DMG e arraste o Dotchi para Aplicativos.</li><li>Ejete a imagem e abra o Dotchi pela pasta Aplicativos.</li></ol><p class="notice">O Dotchi 1.0 é distribuído para Apple Silicon e exige macOS 13.3 ou posterior. Não contorne o Gatekeeper se a instalação falhar; use a página de ajuda.</p>`],
-    privacy: ["Privacidade", "Como o Dotchi trata seus arquivos e as poucas conexões ligadas à distribuição.", `<h2>Processamento local</h2><p>O Dotchi não exige conta, não contém telemetria ou publicidade e não envia imagens ou projetos para APIs externas. Preferências, projetos e exportações permanecem no dispositivo ou nos locais que você escolher.</p><h2>IA local opcional</h2><p>O assistente textual opcional usa um modelo Qwen baixado uma vez com integridade verificada e depois executado no dispositivo. Ele não gera imagens.</p><h2>Serviços externos</h2><p>O GitHub serve este site e o download canônico do aplicativo. O itch.io espelha o mesmo DMG como vitrine pública adicional. Esses serviços podem manter registros técnicos de acesso, como endereço IP e horário. O Dotchi não recebe esses registros. Pagamentos opcionais de apoio ainda não estão ativos; esta página será atualizada antes de sua disponibilização.</p><h2>Contato</h2><p>Dúvidas de privacidade: <a href="mailto:dotchi.app@gmail.com">dotchi.app@gmail.com</a>. Não anexe projetos ou imagens privadas sem necessidade.</p>`],
-    terms: ["Termos", "A licença do binário distribuído do Dotchi.", `<p>Copyright © 2026 Luan Martins. Todos os direitos reservados.</p><p>O Dotchi é software proprietário. O download concede licença pessoal, não exclusiva e intransferível para instalar e usar o binário publicado neste repositório.</p><p>Sem autorização prévia e expressa, a licença não permite redistribuir, modificar, sublicenciar, vender, explorar comercialmente, fazer engenharia reversa ou criar trabalhos derivados, salvo onde uma restrição não puder ser aplicada por lei.</p><p>O código-fonte, a documentação interna e o formato <code>.dotchi</code> permanecem propriedade do autor. O software é fornecido no estado em que se encontra, sem garantias expressas ou implícitas, dentro dos limites legais.</p>`],
+    privacy: ["Privacidade", "Como o Dotchi trata seus arquivos e as poucas conexões ligadas à distribuição.", `<h2>Processamento local</h2><p>O Dotchi não exige conta, não contém telemetria ou publicidade e não envia imagens ou projetos para APIs externas. Preferências, projetos e exportações permanecem no dispositivo ou nos locais que você escolher.</p><h2>IA local opcional</h2><p>O assistente textual opcional usa um modelo Qwen baixado uma vez com integridade verificada e depois executado no dispositivo. Ele não gera imagens.</p><h2>Serviços externos</h2><p>O GitHub serve este site e o download canônico do aplicativo. O itch.io espelha o mesmo DMG como vitrine pública adicional. Esses serviços podem manter registros técnicos de acesso, como endereço IP e horário. O Dotchi não recebe esses registros.</p><h2>Apoio opcional</h2><p>A página de apoio oferece Pix pelo aplicativo bancário da pessoa contribuinte e PayPal pelo serviço do próprio PayPal. O Dotchi não hospeda formulário de pagamento e não recebe senhas, códigos de autenticação, números de cartão ou credenciais bancárias. O banco ou o PayPal processa o pagamento segundo seus próprios termos de privacidade e pode compartilhar com o recebedor as informações normalmente exibidas no comprovante.</p><h2>Contato</h2><p>Dúvidas de privacidade: <a href="mailto:dotchi.app@gmail.com">dotchi.app@gmail.com</a>. Não anexe projetos ou imagens privadas sem necessidade.</p>`],
+    terms: ["Termos", "A licença do binário distribuído do Dotchi.", `<p>Copyright © 2026 Luan Martins. Todos os direitos reservados.</p><p>O Dotchi é software proprietário. O download concede licença pessoal, não exclusiva e intransferível para instalar e usar o binário publicado neste repositório.</p><p>Sem autorização prévia e expressa, a licença não permite redistribuir, modificar, sublicenciar, vender, explorar comercialmente, fazer engenharia reversa ou criar trabalhos derivados, salvo onde uma restrição não puder ser aplicada por lei.</p><p>O código-fonte, a documentação interna e o formato <code>.dotchi</code> permanecem propriedade do autor. O software é fornecido no estado em que se encontra, sem garantias expressas ou implícitas, dentro dos limites legais.</p><h2>Apoio opcional</h2><p>O apoio financeiro é voluntário. Ele não é uma compra e não cria direito a recursos, prioridade de suporte, influência, serviços ou licença diferente.</p>`],
     help: ["Ajuda", "Instalação, feedback e formas seguras de pedir suporte.", `<h2>Instalação</h2><p>Confira o SHA-256 do DMG, instale o Dotchi em Aplicativos e abra normalmente. Não desative o Gatekeeper nem remova atributos de quarentena.</p><h2 id="feedback">Enviar feedback</h2><p>Escreva para <a href="mailto:dotchi.app@gmail.com?subject=Feedback%20do%20Dotchi">dotchi.app@gmail.com</a> ou abra uma <a href="https://github.com/itsmeluan/dotchi-releases/issues/new">Issue pública no GitHub</a>. Inclua a versão do Dotchi, a versão do macOS, os passos para reproduzir, o resultado esperado e o que ocorreu.</p><p class="notice">Nunca publique senhas, códigos 2FA, chaves de recuperação, chaves privadas, certificados, projetos confidenciais ou imagens que não possam ser públicas.</p><h2>Problemas no download</h2><p>Inclua a mensagem de erro exata e o SHA-256 calculado. O Dotchi não possui atualização automática nesta versão.</p>`],
     changelog: ["Novidades", "O que mudou em cada versão pública do Dotchi.", `<h2>Versão ${release.version}</h2><p>Primeira versão estável para Apple Silicon, com macOS 13.3 ou posterior.</p><ul><li>Conversão determinística de imagens em pixel art.</li><li>Editor de sprites com camadas, frames, paletas, histórico de cores, ferramentas agrupadas e cursores contextuais.</li><li>Desenho pixel-perfect, formas, simetria par/ímpar e seleções que podem começar fora do canvas.</li><li>Exportações de PNG, animação, tiles e fluxos de jogos.</li><li>QuickLook para documentos <code>.dotchi</code>.</li><li>IA textual Qwen local e opcional.</li><li>Integração MCP local e restrita, com preview, refino visual e escrita create-only explícita.</li></ul><p>O DMG é assinado, notarizado, grampeado e publicado com SHA-256.</p>`],
-    support: ["Apoie o Dotchi", "O Dotchi é gratuito e completo. O apoio opcional ajudará a sustentar seu desenvolvimento.", `<p>O apoio é voluntário e não libera recursos, prioridade, influência ou uma edição diferente. Os canais abaixo permanecem inativos até a confirmação final dos dados públicos do recebedor e da orientação contábil.</p><div class="support-grid"><article class="card placeholder"><span class="status">Em preparação</span><h2>Brasil — Pix</h2><p>Uma chave Pix aleatória e o nome público do recebedor aparecerão aqui somente depois da confirmação final.</p><span class="button" aria-disabled="true">Pix indisponível</span></article><article class="card placeholder"><span class="status">Em preparação</span><h2>Internacional — PayPal</h2><p>O link oficial de pagamento do PayPal Business aparecerá aqui somente depois da confirmação final.</p><span class="button" aria-disabled="true">PayPal indisponível</span></article></div><p class="notice">Hoje não existe neste site link de pagamento, chave Pix, QR Code ou identidade do recebedor. Se alguém apresentar um desses dados como oficial, não pague.</p>`],
+    support: ["Apoie o Dotchi", "O Dotchi é gratuito e completo. O apoio opcional ajuda a sustentar seu desenvolvimento.", supportCards(true)],
   }
 };
 
@@ -150,6 +217,8 @@ await rm(out, { recursive: true, force: true });
 await mkdir(resolve(out, "assets"), { recursive: true });
 await cp(resolve(here, "styles.css"), resolve(out, "assets/styles.css"));
 await cp(resolve(here, "site.js"), resolve(out, "assets/site.js"));
+await cp(resolve(here, "assets", support.pix.qrAsset), resolve(out, "assets", support.pix.qrAsset));
+await cp(resolve(here, "assets", support.paypal.qrAsset), resolve(out, "assets", support.paypal.qrAsset));
 await cp(resolve(here, "../../dotchi/src/assets/dotchi-logo.png"), resolve(out, "assets/dotchi-logo.png"));
 await cp(resolve(here, "../../dotchi/docs/provas-carimbo-por-confianca/candlestag-concept-0-1x.png"), resolve(out, "assets/resultado-dotchi.png"));
 await cp(resolve(here, "../../dotchi/docs/provas-carimbo-por-confianca/candlestag-concept-0-6x.png"), resolve(out, "assets/resultado-dotchi-6x.png"));
