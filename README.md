@@ -11,6 +11,8 @@ conta, assinatura ou serviço pago.
 
 Baixe a versão mais recente na página de
 [Releases](https://github.com/itsmeluan/dotchi-releases/releases/latest).
+O mesmo DMG também está disponível na
+[página pública do Dotchi no itch.io](https://dotchiapp.itch.io/dotchi).
 
 A versão 1.0 é para Macs com Apple Silicon (`arm64`) e exige macOS 13.3 ou
 posterior. Cada Release declara o SHA-256 do DMG para conferência de

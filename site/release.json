@@ -8,5 +8,6 @@
   "size": "45.101.203 bytes",
   "sha256": "1eaa83caaeb84f3bf8c7b9e3647bb3787a38fc0679cd3b4822369e6a727ec45e",
   "downloadUrl": "https://github.com/itsmeluan/dotchi-releases/releases/download/v1.0.0/Dotchi_1.0.0_aarch64.dmg",
-  "releaseUrl": "https://github.com/itsmeluan/dotchi-releases/releases/tag/v1.0.0"
+  "releaseUrl": "https://github.com/itsmeluan/dotchi-releases/releases/tag/v1.0.0",
+  "itchUrl": "https://dotchiapp.itch.io/dotchi"
 }
